@@ -49,9 +49,20 @@ body {
   padding: 20px 10px 20px 20px;
 }
 
-.Item-title {
-  width: 100%;
+.Item-content {
   padding: 20px 10px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.Item-title {
+  padding-right: 10px;
+}
+
+.Item-selectionCount {
+  padding-left: 10px;
+  border-left: 1px solid;
 }
 
 .Item-actions {

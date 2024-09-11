@@ -26,3 +26,13 @@ export function createElement(name, props = {}, ...children) {
 
   return element;
 }
+
+export function plural(number, variants) {
+  if(number % 10 === 1 && number % 100 !== 11) {
+    return variants[0]
+  } else if((number % 10 >= 2 && number % 10 <= 4 && (number % 100 < 10 || number % 100 >= 20))) {
+    return variants[1]
+  } else {
+    return variants[2]
+  }
+}
