@@ -36,3 +36,7 @@ export function plural(number, variants) {
     return variants[2]
   }
 }
+
+export const generateItemCode = (function (start = 0) {
+  return () => ++start;
+}());

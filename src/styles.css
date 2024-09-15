@@ -56,15 +56,6 @@ body {
   justify-content: flex-start;
 }
 
-.Item-title {
-  padding-right: 10px;
-}
-
-.Item-selectionCount {
-  padding-left: 10px;
-  border-left: 1px solid;
-}
-
 .Item-actions {
   display: flex;
   justify-content: flex-end;

@@ -1,6 +1,8 @@
 /**
  * Хранилище состояния приложения
  */
+import {generateItemCode} from "./utils";
+
 class Store {
   constructor(initState = {}) {
     this.state = initState;
@@ -44,7 +46,7 @@ class Store {
   addItem() {
     this.setState({
       ...this.state,
-      list: [...this.state.list, { code: this.state.nextCode, title: 'Новая запись', selectionCount: 0 }],
+      list: [...this.state.list, { code: generateItemCode(), title: 'Новая запись', selectionCount: 0 }],
       nextCode: this.state.nextCode + 1
     });
   }

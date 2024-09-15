@@ -31,7 +31,7 @@ function App({ store }) {
                   <div className="Item-title">{item.title}</div>
                   {item.selectionCount > 0 &&
                     <div className="Item-selectionCount">
-                    {`Выделяли ${item.selectionCount} ${plural(item.selectionCount, ['раз', 'раза', 'раз'])}`}
+                      &nbsp;{`| Выделяли ${item.selectionCount} ${plural(item.selectionCount, ['раз', 'раза', 'раз'])}`}
                   </div>}
                 </div>
                 <div className="Item-actions">
