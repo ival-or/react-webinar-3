@@ -7,7 +7,10 @@ import {cn as bem} from "@bem-react/classname";
 function Item(props) {
 
   const callbacks = {
-    onAdd: (e) => props.onAdd(props.item.code, props.item.price)
+    onAdd: (e) => {
+      e.stopPropagation();
+      props.onAdd(props.item.code, props.item.price)
+    }
   }
 
   const cn = bem('Item');

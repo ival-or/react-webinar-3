@@ -21,7 +21,7 @@ function Cart({store}) {
 
   const renders = {
     itemCart: useCallback((item) => {
-      return <ItemCart item={item} onRemove={callbacks.removeFromCart}/>
+      return <ItemCart item={item} onDeleteProduct={callbacks.removeFromCart}/>
     }, [callbacks.removeFromCart]),
   };
 
@@ -33,4 +33,4 @@ function Cart({store}) {
   );
 }
 
-export default memo(Cart);
+export default Cart;

@@ -42,4 +42,4 @@ function Main({store}) {
   );
 }
 
-export default memo(Main);
+export default Main;
