@@ -1,7 +1,7 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { generateCode } from './utils.js';
-import App from './app.js';
+import {createRoot} from 'react-dom/client';
+import {generateCode} from './utils.js';
+import App from './app/app';
 import Store from './store.js';
 
 const store = new Store({
@@ -14,6 +14,9 @@ const store = new Store({
     { code: generateCode(), title: 'Карандаши цветные', price: 111 },
     { code: generateCode(), title: 'Товар сюрприз', price: 0 },
   ],
+  cartList: [],
+  productsSum: 0,
+  modalState: false
 });
 
 const root = createRoot(document.getElementById('root'));

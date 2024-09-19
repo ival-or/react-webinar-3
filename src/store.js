@@ -1,4 +1,3 @@
-import { generateCode } from './utils';
 
 /**
  * Хранилище состояния приложения
@@ -40,48 +39,52 @@ class Store {
     for (const listener of this.listeners) listener();
   }
 
-  /**
-   * Добавление новой записи
-   */
-  addItem() {
-    this.setState({
-      ...this.state,
-      list: [...this.state.list, { code: generateCode(), title: 'Новая запись' }],
-    });
-  }
+  addProduct(code, price) {
+    const listItem = this.state.list.find(item => item.code === code)
 
-  /**
-   * Удаление записи по коду
-   * @param code
-   */
-  deleteItem(code) {
-    this.setState({
-      ...this.state,
-      // Новый список, в котором не будет удаляемой записи
-      list: this.state.list.filter(item => item.code !== code),
-    });
-  }
+    let newCartList = this.state.cartList
 
-  /**
-   * Выделение записи по коду
-   * @param code
-   */
-  selectItem(code) {
+    const cartListItem = newCartList.find(item => item.code === code)
+
+    if (cartListItem) {
+      this.setState({
+        ...this.state,
+        cartList: this.state.cartList.map(item => {
+          if (item.code === code) {
+            return {
+              ...item,
+              amount: item.amount + 1,
+              itemSum: item.itemSum + price,
+            };
+          }
+          return item;
+        }),
+        productsSum: this.state.productsSum + price
+      })
+    } else {
+      this.setState({
+        ...this.state,
+        cartList: [...this.state.cartList, {...listItem, amount: 1, itemSum: price}],
+        productsSum: this.state.productsSum + price
+      })
+    }
+  };
+
+  deleteProduct(code) {
+    const itemSum = this.state.cartList.find(item => item.code === code).itemSum
+
     this.setState({
       ...this.state,
-      list: this.state.list.map(item => {
-        if (item.code === code) {
-          // Смена выделения и подсчёт
-          return {
-            ...item,
-            selected: !item.selected,
-            count: item.selected ? item.count : item.count + 1 || 1,
-          };
-        }
-        // Сброс выделения если выделена
-        return item.selected ? { ...item, selected: false } : item;
-      }),
-    });
+      cartList: this.state.cartList.filter(item => item.code !== code),
+      productsSum: this.state.productsSum - itemSum
+    })
+  };
+
+  changeModalState() {
+    this.setState({
+      ...this.state,
+      modalState: !this.state.modalState
+    })
   }
 }
 

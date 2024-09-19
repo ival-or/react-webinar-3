@@ -1,6 +1,6 @@
 .List {
+  border-top: 1px dashed #ccc;
 }
-
 .List-item {
   border-bottom: 1px dashed #ccc;
 }
