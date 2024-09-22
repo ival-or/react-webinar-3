@@ -5,7 +5,7 @@ import {cn as bem} from '@bem-react/classname';
 import {formatPrice, plural} from "../../utils";
 import './style.css';
 
-function CartTool({sum, amount, onOpen}) {
+function CartTool({sum=0, amount=0, onOpen}) {
   const cn = bem('CartTool');
 
   return (
@@ -31,11 +31,5 @@ CartTool.propTypes = {
   sum: PropTypes.number,
   amount: PropTypes.number
 };
-
-CartTool.defaultProps = {
-  onOpen: () => {},
-  sum: 0,
-  amount: 0
-}
 
 export default memo(CartTool);

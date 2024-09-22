@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './style.css';
 import {cn as bem} from "@bem-react/classname";
 
-function List({list, renderItem}) {
+function List({list=[], renderItem = (item) => {}}) {
 
   const cn = bem('List');
 
@@ -25,9 +25,5 @@ List.propTypes = {
   })).isRequired,
   renderItem: PropTypes.func,
 };
-
-List.defaultProps = {
-  renderItem: (item) => {},
-}
 
 export default memo(List);

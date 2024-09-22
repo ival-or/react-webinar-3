@@ -23,7 +23,7 @@ body:has(.ModalLayout) {
 .ModalLayout-frame {
   position: relative;
   background: #ffffff;
-  margin: 0 auto;
+  margin: auto auto;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 2px 5px 10px rgb(0 0 0 / 5%);
