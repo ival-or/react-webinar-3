@@ -32,3 +32,13 @@
   white-space: nowrap;
   font-size: 18px;
 }
+
+.Item-title a {
+  color: #000;
+  text-decoration: none;
+}
+
+.Item-title a:hover {
+  color: #000;
+  text-decoration: underline;
+}

@@ -1,0 +1,28 @@
+.ProductCard {
+  padding: 20px 40px;
+}
+
+.ProductCard-description {
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+.ProductCard-prop {
+  margin: 20px 0;
+  display: flex;
+  justify-content: flex-start;
+  font-size: 18px
+}
+
+.ProductCard-prop_size_big {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.ProductCard-label {
+  padding-right: 10px;
+}
+
+.ProductCard-value {
+  font-weight: bold;
+}
