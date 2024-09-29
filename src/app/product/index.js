@@ -7,6 +7,7 @@ import Loader from "../../components/loader";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import ProductCard from "../../components/product-card";
+import Controls from "../../containers/controls";
 
 function Product() {
   const store = useStore();
@@ -19,21 +20,18 @@ function Product() {
 
   const select = useSelector(state => ({
     product: state.product.data,
-    waiting: state.product.waiting,
-    amount: state.basket.amount,
-    sum: state.basket.sum
+    waiting: state.product.waiting
   }));
 
   const callbacks = {
     // Добавление в корзину
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
-    openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
   }
 
   return (
     <PageLayout>
       <Head title={select.product.title} />
-      <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} />
+      <Controls />
       <Loader active={select.waiting}>
         <ProductCard product={select.product} onAdd={callbacks.addToBasket}/>
       </Loader>
