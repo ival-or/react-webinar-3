@@ -5,6 +5,7 @@ import useSelector from '../../hooks/use-selector';
 import Select from '../../components/select';
 import Input from '../../components/input';
 import SideLayout from '../../components/side-layout';
+import {formCategoriesList} from "../../utils";
 
 /**
  * Контейнер со всеми фильтрами каталога
@@ -15,6 +16,8 @@ function CatalogFilter() {
   const select = useSelector(state => ({
     sort: state.catalog.params.sort,
     query: state.catalog.params.query,
+    category: state.catalog.params.category,
+    categories: state.categories.list
   }));
 
   const callbacks = {
@@ -24,6 +27,7 @@ function CatalogFilter() {
     onSearch: useCallback(query => store.actions.catalog.setParams({ query, page: 1 }), [store]),
     // Сброс
     onReset: useCallback(() => store.actions.catalog.resetParams(), [store]),
+    onCategory: useCallback(category => store.actions.catalog.setParams({category, page: 1}), [store])
   };
 
   const options = {
@@ -36,12 +40,19 @@ function CatalogFilter() {
       ],
       [],
     ),
+    categories: useMemo(() => ([
+      {value: '', title: 'Все'},
+      ...formCategoriesList(select.categories).map(item => {
+        return {value: item._id, title: '- '.repeat(item.depth) + item.title}
+      })
+    ]), [select.categories]),
   };
 
   const { t } = useTranslate();
 
   return (
     <SideLayout padding="medium">
+      <Select options={options.categories} value={select.category} onChange={callbacks.onCategory} />
       <Select options={options.sort} value={select.sort} onChange={callbacks.onSort} />
       <Input
         value={select.query}

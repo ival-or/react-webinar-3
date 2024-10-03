@@ -33,3 +33,58 @@ export function codeGenerator(start = 0) {
 export function numberFormat(value, locale = 'ru-RU', options = {}) {
   return new Intl.NumberFormat(locale, options).format(value);
 }
+
+export function sortCategories(arr) {
+  let newArr = []
+
+  function findParent(arr, elem, depth = 0) {
+    let res = false
+    for (const item of arr) {
+      if (item._id === elem.parent._id) {
+        item.children.push({...elem, children: [], depth: depth + 1})
+        res = true
+        break
+      } else {
+        if (item.children.length) {
+          res = findParent(item.children, elem, depth + 1)
+          if (res) {
+            break
+          }
+        }
+      }
+    }
+    return res
+  }
+
+  let notFoundChildren = []
+
+  for (const item of arr) {
+    if (item.parent) {
+      if(!findParent(newArr, item)) {
+        notFoundChildren.push(item)
+      }
+    } else {
+      newArr.push({...item, children: [], depth: 0})
+    }
+  }
+  if (notFoundChildren.length) {
+    for (const item of notFoundChildren) {
+      findParent(newArr, item)
+    }
+  }
+  return newArr
+}
+
+export function formCategoriesList(arr) {
+  let result = []
+  for (const item of arr) {
+    result.push(item)
+    if (item.children.length) {
+      for (const elem of item.children) {
+        result.push(elem)
+        result = [...result, ...formCategoriesList(elem.children)]
+      }
+    }
+  }
+  return result
+}
