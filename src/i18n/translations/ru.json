@@ -16,5 +16,13 @@
     "few": "товара",
     "many": "товаров",
     "other": "товара"
-  }
+  },
+  "session.signIn": "Вход",
+  "session.signOut": "Выход",
+  "filter.category.all": "Все",
+  "sort.order": "По порядку",
+  "sort.name": "По наименованию",
+  "sort.-price": "Сначала дорогие",
+  "sort.time": "Древние",
+  "filter.query.placeholder": "Поиск"
 }

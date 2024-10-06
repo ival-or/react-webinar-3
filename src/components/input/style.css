@@ -3,6 +3,21 @@
   padding: 2px;
 }
 
+.Input-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.Input-input {
+  width: 203px;
+  height: 20px;
+}
+
+.Input-error {
+  padding-top: 20px;
+  color: #f00;
+}
+
 .Input_theme_big {
   width: 300px;
 }

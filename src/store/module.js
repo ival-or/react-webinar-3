@@ -5,7 +5,7 @@
 class StoreModule {
   constructor(store, name) {
     this.store = store;
-    this.name = name;
+    this.name = name
   }
 
   initState() {

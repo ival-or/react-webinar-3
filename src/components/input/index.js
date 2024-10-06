@@ -25,13 +25,19 @@ function Input(props) {
 
   const cn = bem('Input');
   return (
-    <input
-      className={cn({ theme: props.theme })}
-      value={value}
-      type={props.type}
-      placeholder={props.placeholder}
-      onChange={onChange}
-    />
+    <div className={cn({ theme: props.theme })}>
+      <label className={cn('field')}>
+        {props.label}
+        <input
+          className={cn('input')}
+          value={value}
+          type={props.type}
+          placeholder={props.placeholder}
+          onChange={onChange}
+        />
+      </label>
+      {props.error && <div className={cn('error')}>{props.error}</div>}
+    </div>
   );
 }
 
@@ -42,6 +48,8 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   theme: PropTypes.string,
+  label: PropTypes.string,
+  error: PropTypes.string
 };
 
 Input.defaultProps = {

@@ -34,57 +34,33 @@ export function numberFormat(value, locale = 'ru-RU', options = {}) {
   return new Intl.NumberFormat(locale, options).format(value);
 }
 
-export function sortCategories(arr) {
-  let newArr = []
+export function listToTree(list, key = '_id') {
+  let nodes = {};
+  let roots = {};
+  for (const item of list) {
 
-  function findParent(arr, elem, depth = 0) {
-    let res = false
-    for (const item of arr) {
-      if (item._id === elem.parent._id) {
-        item.children.push({...elem, children: [], depth: depth + 1})
-        res = true
-        break
-      } else {
-        if (item.children.length) {
-          res = findParent(item.children, elem, depth + 1)
-          if (res) {
-            break
-          }
-        }
-      }
-    }
-    return res
-  }
+    if (!nodes[item[key]]) {
+      nodes[item[key]] = item;
+      nodes[item[key]].children = [];
 
-  let notFoundChildren = []
-
-  for (const item of arr) {
-    if (item.parent) {
-      if(!findParent(newArr, item)) {
-        notFoundChildren.push(item)
-      }
+      roots[item[key]] = nodes[item[key]];
     } else {
-      newArr.push({...item, children: [], depth: 0})
+      nodes[item[key]] = Object.assign(nodes[item[key]], item);
+    }
+
+    if (item.parent?._id) {
+      if (!nodes[item.parent._id]) nodes[item.parent[key]] = {children: []};
+      nodes[item.parent[key]].children.push(nodes[item[key]]);
+      if (roots[item[key]]) delete roots[item[key]];
     }
   }
-  if (notFoundChildren.length) {
-    for (const item of notFoundChildren) {
-      findParent(newArr, item)
-    }
-  }
-  return newArr
+  return Object.values(roots);
 }
 
-export function formCategoriesList(arr) {
-  let result = []
-  for (const item of arr) {
-    result.push(item)
-    if (item.children.length) {
-      for (const elem of item.children) {
-        result.push(elem)
-        result = [...result, ...formCategoriesList(elem.children)]
-      }
-    }
+export function treeToList(tree, callback, depth = 0, result = []) {
+  for (const item of tree) {
+    result.push(callback ? callback(item, depth) : item);
+    if (item.children?.length) treeToList(item.children, callback, depth + 1, result);
   }
-  return result
+  return result;
 }

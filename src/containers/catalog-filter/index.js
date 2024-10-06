@@ -5,7 +5,7 @@ import useSelector from '../../hooks/use-selector';
 import Select from '../../components/select';
 import Input from '../../components/input';
 import SideLayout from '../../components/side-layout';
-import {formCategoriesList} from "../../utils";
+import {listToTree, treeToList} from "../../utils";
 
 /**
  * Контейнер со всеми фильтрами каталога
@@ -19,6 +19,7 @@ function CatalogFilter() {
     category: state.catalog.params.category,
     categories: state.categories.list
   }));
+  const {t, lang} = useTranslate();
 
   const callbacks = {
     // Сортировка
@@ -27,28 +28,27 @@ function CatalogFilter() {
     onSearch: useCallback(query => store.actions.catalog.setParams({ query, page: 1 }), [store]),
     // Сброс
     onReset: useCallback(() => store.actions.catalog.resetParams(), [store]),
+
     onCategory: useCallback(category => store.actions.catalog.setParams({category, page: 1}), [store])
   };
 
   const options = {
     sort: useMemo(
       () => [
-        { value: 'order', title: 'По порядку' },
-        { value: 'title.ru', title: 'По именованию' },
-        { value: '-price', title: 'Сначала дорогие' },
-        { value: 'edition', title: 'Древние' },
+        { value: 'order', title: t('sort.order') },
+        { value: 'title.ru', title: t('sort.name') },
+        { value: '-price', title: t('sort.-price') },
+        { value: 'edition', title: t('sort.time') },
       ],
-      [],
+      [lang],
     ),
     categories: useMemo(() => ([
-      {value: '', title: 'Все'},
-      ...formCategoriesList(select.categories).map(item => {
-        return {value: item._id, title: '- '.repeat(item.depth) + item.title}
-      })
-    ]), [select.categories]),
+      {value: '', title: t('filter.category.all')},
+      ...treeToList(listToTree(select.categories), (item, depth) => (
+        {value: item._id, title: '- '.repeat(depth) + item.title}
+      ))
+    ]), [select.categories, lang]),
   };
-
-  const { t } = useTranslate();
 
   return (
     <SideLayout padding="medium">
@@ -57,7 +57,7 @@ function CatalogFilter() {
       <Input
         value={select.query}
         onChange={callbacks.onSearch}
-        placeholder={'Поиск'}
+        placeholder={t('filter.query.placeholder')}
         delay={1000}
       />
       <button onClick={callbacks.onReset}>{t('filter.reset')}</button>

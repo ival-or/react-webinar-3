@@ -14,5 +14,13 @@
   "basket.articles": {
     "one": "article",
     "other": "articles"
-  }
+  },
+  "session.signIn": "Sign in",
+  "session.signOut": "Sign out",
+  "filter.category.all": "All",
+  "sort.order": "By order",
+  "sort.name": "By name",
+  "sort.-price": "Price: High to Low",
+  "sort.time": "Oldest",
+  "filter.query.placeholder": "Search"
 }

@@ -19,11 +19,10 @@ class CategoriesState extends StoreModule {
 
     const response = await fetch(`/api/v1/categories?fields=_id,title,parent(_id)&limit=*`);
     const json = await response.json();
-    const sortedCategories = sortCategories(json.result.items)
 
     this.setState({
       ...this.getState(),
-      list: sortedCategories,
+      list: json.result.items,
       waiting: false
     }, 'Категории загружены');
   }
