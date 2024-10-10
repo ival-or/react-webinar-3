@@ -1,0 +1,22 @@
+.CommentAuth {
+  font-size: 16px;
+  display: flex;
+}
+
+.CommentAuth-cancel {
+  text-decoration: underline;
+  color: #666666;
+}
+
+.CommentAuth-cancel:hover {
+  cursor: pointer;
+}
+
+.CommentAuth-login {
+  text-decoration: underline;
+  color: #0087E9;
+}
+
+.CommentAuth-login:hover {
+  cursor: pointer;
+}

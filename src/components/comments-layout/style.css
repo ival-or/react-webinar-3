@@ -1,0 +1,27 @@
+.CommentsLayout {
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.CommentsLayout-count {
+  font-size: 24px;
+  padding-bottom: 25px;
+}
+
+.CommentsLayout-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.CommentsLayout-more {
+  font-size: 12px;
+  color: #0087E9;
+  width: max-content;
+  padding-top: 30px;
+}
+
+.CommentsLayout-more:hover {
+  cursor: pointer;
+}

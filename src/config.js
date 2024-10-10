@@ -12,6 +12,7 @@ const config = {
       session: {
         // Названия токена в АПИ
         tokenHeader: 'X-Token',
+        langHeader: 'X-Lang'
       },
     },
   },
