@@ -41,7 +41,6 @@ function Comments() {
     }, []),
     removeAnsweredComment: useCallback(async () => {
       await setAnsweredId('')
-      executeScroll()
     }, [])
   }
 
